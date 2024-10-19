@@ -38,7 +38,7 @@
 프론트엔드: React 또는 Vue.js (사용자 인터페이스)     
 백엔드: Node.js 또는 Django (서버 및 데이터 처리)    
 데이터베이스: MongoDB 또는 PostgreSQL (해파리 출현 데이터 저장)     
-지도 API: Google Maps API 또는 Leaflet (위치 기반 서비스) -> 카카오 api   
+지도 API: Leaflet (위치 기반 서비스) 
 (지도 api를 가져와서 원하는 정보와 결합해 띄우기)   
 
 이미지 인식 기술: TensorFlow.js 또는 OpenCV (해파리 사진 인식 및 분류) -> teachable machine -> 해파리 데이터셋 모으기 (각 해파리별 데이터 수집)   
