@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <title>해파리 출현 해역 지도</title>
+    <link rel="stylesheet" href="css/map.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="img/img2.png" alt="홈 화면" style="height: 40px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link home" href="index.html">홈 화면<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link search" href="jellyfish_search.html">해파리 검색</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link map" href="jellyfish_map.html">해파리 지도</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link dictionary" href="jellyfish_dictionary.html">해파리 도감</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link report" href="jellyfish_report.html">신고하기</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="map"></div>
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color red"></div>
+            <span>노무라입깃해파리</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color blue"></div>
+            <span>보름달물해파리</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color green"></div>
+            <span>두빛보름달해파리</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color purple"></div>
+            <span>유령해파리</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color orange"></div>
+            <span>살파류</span>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // 지도 초기화
+        var map = L.map('map').setView([36.5, 127.5], 7);  // 한국 중심 좌표 설정
+
+        // OpenStreetMap 타일 레이어 추가
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        // 노무라입깃해파리 위치 (빨간색 마커)
+        var nomuraJellyfish = [
+        { coords: [34.3, 126.7], name: "전남 완도 약산면~신지면 사이" },
+            { coords: [34.8, 128.0], name: "경남 남해 은모래비치 연안" },
+            { coords: [34.7, 128.1], name: "경남 남해 미조리 연근해" },
+            { coords: [34.8, 128.1], name: "경남 남해 은점방파제 연안" },
+            { coords: [34.9, 128.0], name: "경남 남해 물건항 연안" },
+            { coords: [34.9, 128.3], name: "경남 고성 자란만 연안" },
+            { coords: [34.8, 128.4], name: "경남 통영 사량도 연안" },
+            { coords: [34.7, 128.4], name: "경남 통영 금평리 연안" },
+            { coords: [34.6, 128.3], name: "경남 통영 욕지도 연안" },
+            { coords: [34.8, 128.5], name: "경남 통영 연대도 연안" },
+            { coords: [34.9, 128.5], name: "경남 통영 부지도~소지도 사이" },
+            { coords: [34.7, 128.5], name: "경남 거제 해금강~지심도 사이" },
+            { coords: [35.1, 128.6], name: "경남 창원 초리도~화도 사이" },
+            { coords: [35.0, 129.0], name: "부산 영도 태종대 연안" },
+            { coords: [35.2, 128.9], name: "부산 강서 새바지 연안" },
+            { coords: [35.3, 129.3], name: "부산 기장 칠암리 연안" },
+            { coords: [35.5, 129.4], name: "울산 동구 울기등대 연근해" },
+            { coords: [36.0, 129.5], name: "경북 포항 하정3리 연안" },
+            { coords: [37.4, 129.3], name: "강원 삼척 근덕면 연안" },
+            { coords: [37.7, 129.0], name: "강원 강릉 옥계항 연안" },
+            { coords: [38.2, 128.6], name: "강원 속초 대포항 연안" }
+        ];
+
+        // 보름달물해파리 위치 (파란색 마커)
+        var moonJellyfish = [
+        { coords: [35.7, 126.6], name: "전북 부안 왕등도 연안" },
+            { coords: [34.9, 128.6], name: "경남 거제 거제만 연안" },
+            { coords: [36.4, 129.4], name: "경북 영덕 대진리 연안" },
+            { coords: [37.4, 129.3], name: "강원 삼척 근덕면 연안" },
+            { coords: [37.7, 129.0], name: "강원 강릉 옥계항 연안" },
+            { coords: [38.1, 128.6], name: "강원 양양 동산항 연안" },
+            { coords: [38.1, 128.7], name: "강원 양양 낙산항 연안" }
+        ];
+
+        // 마커 추가 함수 (특정 색상의 마커 추가)
+        function addMarkers(jellyfishData, color) {
+            jellyfishData.forEach(function (site) {
+                L.circleMarker(site.coords, {
+                    color: color,
+                    radius: 8,
+                    fillColor: color,
+                    fillOpacity: 0.5
+                }).addTo(map).bindPopup(site.name);
+            });
+        }
+
+        // 두빛보름달해파리 위치 데이터 (녹색 마커)
+        var twoSpotMoonJellyfish = [
+            // 고밀도 출현 해역
+            { coords: [37.4, 129.3], name: "강원 삼척 근덕면 연안" },
+            { coords: [38.0, 128.6], name: "강원 양양 남애항 연안" },
+            { coords: [38.0, 128.6], name: "강원 양양 수산리 연안" },
+            // 저밀도 출현 해역
+            { coords: [36.0, 129.4], name: "경북 포항 구평리 연안" },
+            { coords: [36.0, 129.4], name: "경북 포항 조사리 연안" },
+            { coords: [36.2, 129.4], name: "경북 울진 후정해수욕장 연안" },
+            { coords: [37.4, 129.4], name: "강원 삼척 임원항 연안" },
+            { coords: [37.5, 129.1], name: "강원 동해 묵호항 연안" },
+            { coords: [37.5, 129.2], name: "강원 동해 대진항 연안" },
+            { coords: [37.8, 128.9], name: "강원 강릉 강릉항 근해" },
+            { coords: [37.7, 128.9], name: "강원 강릉 주문진 근해" },
+            { coords: [38.1, 128.7], name: "강원 양양 낙산항 연안" },
+            { coords: [38.2, 128.6], name: "강원 속초 대포항 연안" }
+        ];
+
+        // 유령해파리 위치 데이터 (보라색 마커)
+        var ghostJellyfish = [
+            { coords: [35.2, 129.2], name: "부산 기장 칠암리 연안" }
+        ];
+
+        // 살파류 위치 데이터 (주황색 마커)
+        var salp = [
+            { coords: [34.9, 128.0], name: "경남 남해 앵강만 연안" },
+            { coords: [34.8, 128.0], name: "경남 남해 은모래비치 연안" },
+            { coords: [38.0, 128.6], name: "강원 양양 남애항 연안" },
+            { coords: [38.1, 128.6], name: "강원 양양 낙산항 연안" }
+        ];
+
+        // 노무라입깃해파리 (빨간색)
+        addMarkers(nomuraJellyfish, 'red');
+
+        // 보름달물해파리 (파란색)
+        addMarkers(moonJellyfish, 'blue');
+
+        // 두빛보름달해파리 (녹색 마커)
+        addMarkers(twoSpotMoonJellyfish, 'green');
+
+        // 유령해파리 (보라색 마커)
+        addMarkers(ghostJellyfish, 'purple');
+
+        // 살파류 (주황색 마커)
+        addMarkers(salp, 'orange');
+
+        // 내 위치를 부산 영도 태종대 주변으로 설정
+        var myLocation = { lat: 35.0, lng: 129.0 };
+
+        // 현재 위치 마커 추가
+        L.marker([myLocation.lat, myLocation.lng], { icon: L.icon({ iconUrl: 'https://unpkg.com/leaflet/dist/images/marker-icon.png', iconSize: [25, 41] }) })
+            .addTo(map)
+            .bindPopup("내 위치")
+            .openPopup();
+
+        // 해파리 발생 위치와 거리 계산 및 경고 표시
+        function checkProximity() {
+            var jellyfishLocations = [
+                { coords: [35.0, 129.0], name: "부산 영도 태종대 연안", jellyfish: "노무라입깃해파리" },
+                { coords: [35.3, 129.3], name: "부산 기장 칠암리 연안", jellyfish: "유령해파리" }
+                // 다른 해파리 위치 추가 가능
+            ];
+
+            jellyfishLocations.forEach(function (site) {
+                var distance = map.distance([myLocation.lat, myLocation.lng], site.coords);
+                if (distance < 5000) { // 5000m (5km) 이내
+                    alert("경고: " + site.jellyfish + " 출몰 지역!\n" + "해파리 발생 위치에 가까운 곳에 있습니다: " + site.name);
+                }
+            });
+        }
+
+        // 프로시미티 체크 함수 호출
+        checkProximity();
+    
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

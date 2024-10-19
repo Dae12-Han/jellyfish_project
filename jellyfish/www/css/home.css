@@ -1,0 +1,294 @@
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #EEEEEE;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 5rem;
+    font-family: 'yg-jalnan', sans-serif;
+    animation: fadeIn 1.5s ease; /* 부드러운 화면 등장 애니메이션 */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.navbar {
+    background-color: #11D5F0 !important;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15); /* Navbar shadow */
+    opacity: 0.95; /* 살짝 투명하게 */
+    backdrop-filter: blur(5px); /* 배경과 분리되는 효과 */
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+/* News Container */
+.news-container {
+    width: 80%; /* Adjust width as needed */
+    max-width: 40rem; /* Limit max width */
+    background-color: #ffffff; /* White background for the container */
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 1.5rem; /* Padding around the news list */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* Shadow effect */
+    margin: 1rem auto; /* Center the container */
+}
+
+/* News Container */
+.news-container {
+    width: 80%; /* Adjust width as needed */
+    max-width: 40rem; /* Limit max width */
+    background-color: #ffffff; /* White background for the container */
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 1.5rem; /* Padding around the news list */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* Shadow effect */
+    margin: 1rem auto; /* Center the container */
+    position: relative; /* For pseudo-element positioning */
+}
+
+/* Adding a decorative border */
+.news-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0.5rem;
+    border: 2px solid #11D5F0; /* Border color */
+    z-index: -1; /* Send the border behind the container */
+    transition: transform 0.3s ease; /* Animation on hover */
+}
+
+/* News List */
+.news-list {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* Add spacing between items */
+}
+
+.news-list li {
+    width: 100%;
+    text-align: left;
+    position: relative;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #f8f9fa; /* Light gray background */
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, box-shadow 0.3s ease;
+}
+
+.news-list li:hover {
+    background-color: #e6f7ff; /* Light blue background on hover */
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+/* Remove decorative circle */
+.news-list li::before {
+    content: none; /* This removes the circle */
+}
+
+/* News Links */
+.news-list a {
+    font-size: 1.1rem;
+    color: #333333; /* Darker color for the text */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.news-list a:hover {
+    text-decoration: underline;
+    color: #1a1a1a; /* Darker color on hover */
+    transform: translateX(5px); /* Slight right movement on hover */
+}
+
+/* More Button */
+.news-list .more-button a {
+    color: #333333; /* Darker color for the 'more' button */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out, transform 0.2s ease;
+}
+
+.news-list .more-button a:hover {
+    color: #1a1a1a; /* Darker hover color for 'more' button */
+    text-decoration: underline;
+    transform: scale(1.05);
+}
+
+/* Hover effect for news container */
+.news-container:hover::before {
+    transform: scale(1.05); /* Slightly enlarge the border on hover */
+}
+
+
+/* 최신 해파리 뉴스 헤더 스타일 수정 */
+.news-header-box {
+    width: 80%;
+    max-width: 40rem;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0.95); /* 살짝 투명한 배경 */
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 2rem auto;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3); /* 더 깊은 그림자 */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* 미묘한 테두리 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-header-box:hover {
+    transform: translateY(-0.5rem); /* 살짝 올라오는 효과 */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4); /* 더 강한 그림자 */
+}
+
+.news-header {
+    font-size: 2.25rem;
+    color: #222;
+    letter-spacing: 0.07rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+    background: linear-gradient(to right, #11D5F0, #0056b3);
+    
+    /* Vendor prefixes for background-clip */
+    -webkit-background-clip: text; /* Chrome, Safari */
+    background-clip: text; /* Standard property */
+
+    color: transparent; /* Color is transparent so the gradient shows through */
+}
+
+/* 뉴스 박스 스타일 */
+.news-box {
+    width: 80%;
+    max-width: 40rem;
+    margin: 2rem auto;
+    background-color: rgba(255, 255, 255, 0.9); /* 반투명한 배경 */
+    border-radius: 0.75rem;
+    padding: 1.75rem;
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2); /* 깊은 그림자 */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-box:hover {
+    transform: translateY(-0.3rem); /* 살짝 올라오는 효과 */
+    box-shadow: 0 1.25rem 2.25rem rgba(0, 0, 0, 0.3); /* 더 깊은 그림자 */
+}
+
+.button-container {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.button-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%; /* 2행 2열을 유지하는 비율 */
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    border: 2px solid #11D5F0;
+    background: linear-gradient(135deg, #f0f9ff, #cfe9ff);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 버튼 행 스타일 */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    max-width: 40rem;
+    margin-bottom: 1.5rem;
+}
+
+.button-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.25);
+}
+
+/* 버튼 이미지 */
+.button-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.75rem;
+}
+
+/* 버튼 텍스트 */
+.button-label {
+    font-size: 0.8rem !important;
+    color: #333;
+    letter-spacing: 0.03rem;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* 넘치는 텍스트 말줄임표 처리 */
+    max-width: 100%; /* 버튼 너비 내에서만 텍스트 표시 */
+}
+
+/* 미디어 쿼리 */
+@media (max-width: 1200px) {
+    .news-header {
+        font-size: 1.75rem;
+    }
+
+    .news-list a {
+        font-size: 1rem;
+    }
+
+    .button-box {
+        width: 48%; /* 2행 2열을 유지하는 너비로 설정 */
+    }
+}
+
+@media (max-width: 768px) {
+    .news-header {
+        font-size: 1.5rem;
+    }
+
+    .news-list a {
+        font-size: 0.9rem;
+    }
+
+    .button-container {
+        justify-content: space-between; /* flex-direction을 유지해서 2열 유지 */
+    }
+
+    .button-box {
+        width: 48%; /* 2행 2열을 유지하는 너비 */
+    }
+
+    .button-label {
+        font-size: 1rem; /* 모바일 폰트 크기 조정 */
+        white-space: nowrap; /* 한 줄 유지 */
+    }
+}
